@@ -1,10 +1,3 @@
-@individual_movie
-# {
-#   id: @movie.id,
-#   title: @movie.title,
-#   plot: @movie.plot
-# }
+@movie
 
-{
- title: "This is a silly name." 
-}
+

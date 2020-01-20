@@ -8,7 +8,7 @@ class Api::ActorsController < ApplicationController
     render "movie.json.jb"
   end
   def movie_method
-    @movie = Movie.take(2)
+    @movie = Movie.take(3)
     render "movie.json.jb" 
   end
 end
