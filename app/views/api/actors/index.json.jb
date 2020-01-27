@@ -1,9 +1,11 @@
-@movies.map do |movie|
+@actors.map do |actor|
   {
-    id: movie.id,
-    title: movie.title,
-    year: movie.year,
-    plot: movie.plot
+   id: actor.id, 
+   first_name: actor.first_name,
+   last_name: actor.last_name, 
+   known_for: actor.known_for,
+   age: actor.age,
+   gender: actor.gender 
   }
 end
 

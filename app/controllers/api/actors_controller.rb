@@ -1,35 +1,45 @@
 class Api::ActorsController < ApplicationController
-  def actor_action
-    @actor = Actor.last
-    render "actor.json.jb"
+  def index
+    @actors = Actor.all.order(age: :desc)
+    render "index.json.jb"
   end
 
-  def movie_method
-    @individual_movie = Movie.all
-    render "movie.json.jb"
+  def create
+    @actor = Actor.new(
+      first_name: params[:first_name],
+      last_name: params[:last_name],
+      known_for: params[:known_for],
+      age: params[:age],
+      gender: params[:gender]
+    )
+    @actor.save
+    render "show.json.jb"
   end
 
-  def movie_method
-    @movie = Movie.take(3)
-    render "movie.json.jb" 
+  def show
+    @actor = Actor.find_by(id: params[:id])
+    render "show.json.jb"
   end
 
-  def actor_query_action
-    @actor = params["message"].to_i
-    if @actor = ""
-     @actor = Actor.first
-    end  
-    render "actor_query.json.jb"
+  def update
+    @actor = Actor.find_by(id: params[:id])
+    @actor.first_name = params[:first_name] || @actor.first_name
+    @actor.last_name = params[:last_name] || @actor.last_name
+    @actor.known_for = params[:known_for] || @actor.known_for
+    @actor.age = params[:age] || @actor.age
+    @actor.gender = params[:gender] || @actor.gender
+    
+    if @actor.save
+      render "show.json.jb"
+    else
+      render json: {errors: @actor.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
-  def actor_segment_action
-     @actor = params["message"]
-    if @actor = ""
-     @actor = Actor.all
-    end  
-    render "actor_segment.json.jb"
+  def destroy
+    actor = Actor.find_by(id: params[:id])
+    actor.destroy
+    render json: {message: "Movie successfully destroyed."}
   end
-
-  
 end
 
