@@ -1,0 +1,3 @@
+[submodule "movie-app"]
+	path = movie-app
+	url = https://github.com/credhead5/movie-app.git
