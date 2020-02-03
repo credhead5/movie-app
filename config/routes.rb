@@ -21,5 +21,11 @@ Rails.application.routes.draw do
     patch "/actors/:id" => "actors#update"
     
     delete "/actors/:id" => "actors#destroy"
+    post "/users" => "users#create"
+
+    patch "/users/:id" => "users#show"
+
+    post "/sessions" => "sessions#create"
+
   end
 end
