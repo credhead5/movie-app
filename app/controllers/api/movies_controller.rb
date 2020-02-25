@@ -1,6 +1,6 @@
 class Api::MoviesController < ApplicationController
 
-  before_action :authenticate_admin, except: [:index, :show]
+  # before_action :authenticate_admin, except: [:index, :show]
   
   def index
     @movies = Movie.all
@@ -23,11 +23,10 @@ class Api::MoviesController < ApplicationController
       director: params[:director],
       english: params[:emglish]
     )
+    if
     @movie.save
     render "show.json.jb"
 
-    if @movie.save
-      render 'show.json.jb'
     else
       render json: {errors: @movie.errors.full_messages}, status: :unprocessable_entity
     end
@@ -40,7 +39,7 @@ class Api::MoviesController < ApplicationController
     @movie.plot = params[:plot] || @movie.plot
     @movie.director = params[:director] || @movie.director
     @movie.english =params[:english] || @movie.english
-    if @actor.save
+    if @movie.save
       render "show.json.jb"
     else
       render json: {errors: @actor.errors.full_messages}, status: :unprocessable_entity
