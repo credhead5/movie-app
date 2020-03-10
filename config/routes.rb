@@ -31,5 +31,7 @@ Rails.application.routes.draw do
 
     post "/movie_genres" => "movie_genres#create"
 
+    get "/*path" => proc { [200, {}, [ActionView::Base.new.render(file: 'public/index.html')]] } 
+
   end
 end
